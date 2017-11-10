@@ -1,0 +1,79 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+		spock_version = '1.1-groovy-2.4'
+	}
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+
+group = 'pl.artcoder.playground'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	//spring
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+
+	//database
+	compile('org.liquibase:liquibase-core')
+	runtime('com.h2database:h2')
+	runtime('org.postgresql:postgresql')
+
+	//utils
+	compile('io.vavr:vavr:+')
+	compileOnly('org.projectlombok:lombok')
+
+
+	//unit tests
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile ("org.spockframework:spock-core:$spock_version")
+	testCompile ("org.spockframework:spock-spring:$spock_version")
+	testCompile ("com.jayway.restassured:spring-mock-mvc:+")
+}
+
+jacoco {
+	toolVersion = "0.7.7.201606060606"
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled = true // coveralls plugin depends on xml format report
+		html.enabled = true
+	}
+}
+
+wrapper {
+	gradleVersion "4.3.1"
+}
+
+idea {
+	module {
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}
+
+sourceSets.main.resources.srcDir 'src/main/java'
