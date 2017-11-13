@@ -2,6 +2,7 @@ package pl.artcoder.playground.videostore.film.infrastructure.configuration;
 
 import pl.artcoder.playground.videostore.film.application.SaveFilm;
 import pl.artcoder.playground.videostore.film.application.ShowFilm;
+import pl.artcoder.playground.videostore.film.domain.Film;
 import pl.artcoder.playground.videostore.film.domain.FilmFactory;
 import pl.artcoder.playground.videostore.film.domain.FilmIdSequenceGenerator;
 import pl.artcoder.playground.videostore.film.domain.FilmRepository;
@@ -9,7 +10,7 @@ import pl.artcoder.playground.videostore.film.infrastructure.gateway.inmemory.In
 import pl.artcoder.playground.videostore.film.infrastructure.gateway.inmemory.InMemoryFilmRepository;
 
 public class FilmModuleConfiguration {
-    private final InMemoryFilmRepository filmRepository = new InMemoryFilmRepository();
+    private final InMemoryFilmRepository filmRepository = new InMemoryFilmRepository(Film::getId);
 
     public ShowFilm showFilm() {
         return new ShowFilm(filmRepository());

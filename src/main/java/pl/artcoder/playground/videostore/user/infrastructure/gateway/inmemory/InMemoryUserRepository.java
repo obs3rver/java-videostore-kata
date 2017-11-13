@@ -12,8 +12,8 @@ public class InMemoryUserRepository
         extends BaseInMemoryRepository<User, Long>
         implements UserRepository {
 
-    public InMemoryUserRepository(Function<User, Long> userLongFunction) {
-        super(userLongFunction);
+    public InMemoryUserRepository(Function<User, Long> idFunction) {
+        super(idFunction);
     }
 
     @Override
