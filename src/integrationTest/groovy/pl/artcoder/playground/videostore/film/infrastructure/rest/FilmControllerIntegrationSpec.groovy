@@ -1,5 +1,6 @@
 package pl.artcoder.playground.videostore.film.infrastructure.rest
 
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.ResultActions
 import pl.artcoder.playground.videostore.base.IntegrationSpec
 import pl.artcoder.playground.videostore.film.commons.SampleFilms
@@ -10,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FilmControllerIntegrationSpec extends IntegrationSpec implements SampleFilms {
 
+    @WithMockUser
     def "should not get film with non-existing title"() {
         given: 'Non existing film title'
         String nonExistingTitle = "Spiderman"

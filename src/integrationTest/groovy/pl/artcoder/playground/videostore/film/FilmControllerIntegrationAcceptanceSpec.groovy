@@ -1,6 +1,7 @@
 package pl.artcoder.playground.videostore.film
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.ResultActions
 import pl.artcoder.playground.videostore.base.IntegrationSpec
 import pl.artcoder.playground.videostore.film.application.SaveFilm
@@ -15,6 +16,7 @@ class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements
     @Autowired
     SaveFilm saveFilm
 
+    @WithMockUser
     def "should get films"() {
         given: 'inventory has sample film'
         Film film = createOldFilm()
@@ -23,7 +25,7 @@ class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements
         when: 'I go to /films'
         ResultActions getFilms = mockMvc.perform(get("/films"))
 
-        then: 'I see all films'
+        then: 'I see all repo'
         getFilms.andExpect(status().isOk())
                 .andExpect(content().json("""
                 {

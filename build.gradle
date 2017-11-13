@@ -47,6 +47,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-security')
 
 	//database
 	compile('org.liquibase:liquibase-core')
@@ -65,6 +66,7 @@ dependencies {
 
 	//integration tests
 	integrationTestCompile('org.springframework.boot:spring-boot-starter-test')
+	integrationTestCompile("org.springframework.security:spring-security-test")
 	integrationTestCompile ("com.jayway.restassured:spring-mock-mvc:+")
 	integrationTestCompile ("org.spockframework:spock-core:$spock_version")
 	integrationTestCompile ("org.spockframework:spock-spring:$spock_version")

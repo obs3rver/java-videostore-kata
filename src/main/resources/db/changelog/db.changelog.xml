@@ -28,4 +28,25 @@
 
     </changeSet>
 
+    <changeSet id="003-create-user-table" author="arkadiusz.sojda">
+
+        <createSequence sequenceName="USER_SEQ"/>
+
+        <createTable tableName="user">
+            <column name="ID" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENCODED_PASSWORD" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POINTS" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
 </databaseChangeLog>

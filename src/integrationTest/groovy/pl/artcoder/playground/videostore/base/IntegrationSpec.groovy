@@ -15,6 +15,7 @@ import pl.artcoder.playground.videostore.infrastructure.utils.Profiles
 import spock.lang.Specification
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.MOCK
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity
 
 @ActiveProfiles([Profiles.TEST])
 @SpringBootTest(
@@ -34,6 +35,7 @@ abstract class IntegrationSpec extends Specification implements JsonUtils {
     void setupMockMvc() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
+                .apply(springSecurity())
                 .build()
     }
 
