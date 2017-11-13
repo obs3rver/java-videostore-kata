@@ -20,4 +20,14 @@
 
     </changeSet>
 
+    <changeSet id="002-add-film-type-to-film-table" author="arkadiusz.sojda">
+
+        <addColumn tableName="film">
+            <column name="FILM_TYPE" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+    </changeSet>
+
 </databaseChangeLog>

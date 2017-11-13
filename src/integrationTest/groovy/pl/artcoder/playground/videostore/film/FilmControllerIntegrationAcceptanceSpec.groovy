@@ -17,7 +17,7 @@ class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements
 
     def "should get films"() {
         given: 'inventory has sample film'
-        Film film = createFilm()
+        Film film = createOldFilm()
         saveFilm.save(film)
 
         when: 'I go to /films'

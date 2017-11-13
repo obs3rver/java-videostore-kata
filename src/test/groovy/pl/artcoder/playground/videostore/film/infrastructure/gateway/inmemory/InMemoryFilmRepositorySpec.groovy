@@ -30,7 +30,7 @@ class InMemoryFilmRepositorySpec extends Specification implements SampleFilms {
 
     def "Saved film should be able to be found by id"() {
         given:
-        film = createFilm(filmFactory)
+        film = createOldFilm(filmFactory)
 
         when:
         film = filmRepository.save(film)
@@ -38,12 +38,12 @@ class InMemoryFilmRepositorySpec extends Specification implements SampleFilms {
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().title.title == filmTitle
+        maybeFilm.get().title.title == oldFilmTitle
     }
 
     def "Saved film should be able to be found by title"() {
         given:
-        film = createFilm(filmFactory)
+        film = createOldFilm(filmFactory)
 
         when:
         film = filmRepository.save(film)
@@ -51,12 +51,12 @@ class InMemoryFilmRepositorySpec extends Specification implements SampleFilms {
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().title.title == filmTitle
+        maybeFilm.get().title.title == oldFilmTitle
     }
 
     def "Saved film should be able to be found by findAll method"() {
         given:
-        film = createFilm(filmFactory)
+        film = createOldFilm(filmFactory)
 
         when:
         film = filmRepository.save(film)
@@ -64,6 +64,6 @@ class InMemoryFilmRepositorySpec extends Specification implements SampleFilms {
 
         then:
         page.getNumberOfElements() == 1
-        page.first().title.title == filmTitle
+        page.first().title.title == oldFilmTitle
     }
 }

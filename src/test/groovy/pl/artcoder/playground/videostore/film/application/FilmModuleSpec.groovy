@@ -3,6 +3,7 @@ package pl.artcoder.playground.videostore.film.application
 import io.vavr.control.Option
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import pl.artcoder.playground.videostore.film.commons.SampleFilms
 import pl.artcoder.playground.videostore.film.domain.Film
 import pl.artcoder.playground.videostore.film.domain.FilmFactory
 import pl.artcoder.playground.videostore.film.domain.FilmRepository
@@ -11,7 +12,7 @@ import pl.artcoder.playground.videostore.film.infrastructure.configuration.FilmM
 import spock.lang.Specification
 import spock.lang.Subject
 
-class FilmModuleSpec extends Specification {
+class FilmModuleSpec extends Specification implements SampleFilms {
     FilmModuleConfiguration config = new FilmModuleConfiguration()
 
     FilmFactory filmFactory
@@ -25,8 +26,6 @@ class FilmModuleSpec extends Specification {
     ShowFilm showFilm
 
     Film film
-
-    String filmTitle = "Bolek i Lolek"
 
     def setup() {
         saveFilm = config.saveFilm()
@@ -49,7 +48,7 @@ class FilmModuleSpec extends Specification {
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().getTitle().value() == filmTitle
+        maybeFilm.get().getTitle().value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by title"() {
@@ -57,11 +56,11 @@ class FilmModuleSpec extends Specification {
         film = aSavedFilm()
 
         when:
-        Option<Film> maybeFilm = showFilm.byTitle(Title.from(filmTitle))
+        Option<Film> maybeFilm = showFilm.byTitle(Title.from(oldFilmTitle))
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().getTitle().value() == filmTitle
+        maybeFilm.get().getTitle().value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by list method"() {
@@ -73,12 +72,12 @@ class FilmModuleSpec extends Specification {
 
         then:
         page.getNumberOfElements() == 1
-        page.getContent().first().getTitle().value() == filmTitle
+        page.getContent().first().getTitle().value() == oldFilmTitle
     }
 
     private Film aSavedFilm() {
         saveFilm.save(
-                filmFactory.createFilmWithTitle(filmTitle)
+                createOldFilm(filmFactory)
         )
     }
 }

@@ -37,7 +37,7 @@ class FilmModuleIntegrationSpec extends IntegrationSpec implements SampleFilms {
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().getTitle().value() == filmTitle
+        maybeFilm.get().getTitle().value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by title"() {
@@ -45,11 +45,11 @@ class FilmModuleIntegrationSpec extends IntegrationSpec implements SampleFilms {
         film = aSavedFilm()
 
         when:
-        Option<Film> maybeFilm = showFilm.byTitle(Title.from(filmTitle))
+        Option<Film> maybeFilm = showFilm.byTitle(Title.from(oldFilmTitle))
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().getTitle().value() == filmTitle
+        maybeFilm.get().getTitle().value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by list method"() {
@@ -61,12 +61,12 @@ class FilmModuleIntegrationSpec extends IntegrationSpec implements SampleFilms {
 
         then:
         page.getNumberOfElements() == 1
-        page.getContent().first().getTitle().value() == filmTitle
+        page.getContent().first().getTitle().value() == oldFilmTitle
     }
 
     private Film aSavedFilm() {
         saveFilm.save(
-                createFilm()
+                createOldFilm()
         )
     }
 }

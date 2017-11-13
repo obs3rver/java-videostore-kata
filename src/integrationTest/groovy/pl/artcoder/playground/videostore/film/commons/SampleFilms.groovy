@@ -5,14 +5,26 @@ import org.springframework.beans.factory.annotation.Autowired
 import pl.artcoder.playground.videostore.film.domain.Film
 import pl.artcoder.playground.videostore.film.domain.FilmFactory
 
+import static pl.artcoder.playground.videostore.film.domain.FilmType.*
+
 @CompileStatic
 trait SampleFilms {
     @Autowired
     FilmFactory filmFactory
 
-    String filmTitle = "Bolek i Lolek"
+    String oldFilmTitle = "Metropolis"
+    String regularFilmTitle = "Inception"
+    String newFilmTitle = "Blade Runner 2049"
 
-    Film createFilm() {
-        filmFactory.createFilmWithTitle(filmTitle)
+    Film createOldFilm() {
+        filmFactory.createFilmWithTitleAndType(oldFilmTitle, OLD)
+    }
+
+    Film createRegularFilm() {
+        filmFactory.createFilmWithTitleAndType(regularFilmTitle, REGULAR)
+    }
+
+    Film createNewFilm() {
+        filmFactory.createFilmWithTitleAndType(newFilmTitle, NEW)
     }
 }

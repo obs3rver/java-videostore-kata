@@ -21,7 +21,7 @@ class JpaFilmRepositoryIntegrationSpec extends IntegrationSpec implements Sample
 
     def "Saved film should be able to be found by id"() {
         given:
-        film = createFilm()
+        film = createOldFilm()
 
         when:
         film = filmRepository.save(film)
@@ -29,12 +29,12 @@ class JpaFilmRepositoryIntegrationSpec extends IntegrationSpec implements Sample
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().title.value() == filmTitle
+        maybeFilm.get().title.value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by title"() {
         given:
-        film = createFilm()
+        film = createOldFilm()
 
         when:
         film = filmRepository.save(film)
@@ -42,12 +42,12 @@ class JpaFilmRepositoryIntegrationSpec extends IntegrationSpec implements Sample
 
         then:
         maybeFilm.isDefined()
-        maybeFilm.get().title.value() == filmTitle
+        maybeFilm.get().title.value() == oldFilmTitle
     }
 
     def "Saved film should be able to be found by findAll method"() {
         given:
-        film = createFilm()
+        film = createOldFilm()
 
         when:
         film = filmRepository.save(film)
@@ -55,6 +55,6 @@ class JpaFilmRepositoryIntegrationSpec extends IntegrationSpec implements Sample
 
         then:
         page.getNumberOfElements() == 1
-        page.first().title.value() == filmTitle
+        page.first().title.value() == oldFilmTitle
     }
 }

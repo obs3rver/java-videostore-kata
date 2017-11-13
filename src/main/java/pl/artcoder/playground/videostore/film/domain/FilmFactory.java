@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 public class FilmFactory {
     private final FilmIdSequenceGenerator filmIdSequenceGenerator;
 
-    public Film createFilmWithTitle(@NonNull String filmTitle) {
+    public Film createFilmWithTitleAndType(@NonNull String filmTitle, @NonNull FilmType filmType) {
         return Film.builder()
                 .id(filmIdSequenceGenerator.nextId())
                 .title(Title.from(filmTitle))
+                .filmType(filmType)
                 .build();
     }
 }
