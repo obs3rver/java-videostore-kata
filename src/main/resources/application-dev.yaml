@@ -1,0 +1,12 @@
+server.port: 8080
+
+spring:
+  datasource:
+      url: jdbc:postgresql://localhost:5432/videostore
+      username: videostore
+      password: videostore
+      driver: org.postgresql.Driver
+      test-on-borrow: true
+      validation-query: SELECT 1
+
+logging.level.pl.artcoder.videostore: DEBUG

@@ -7,12 +7,13 @@ spring:
   http.encoding.force: true
   mandatory-file-encoding: UTF-8
   jpa.hibernate.ddl-auto: validate
+  profiles:
+    active: dev
 
 liquibase.change-log: classpath:db/changelog/db.changelog.xml
-
-logging.level.pl.artcoder.videostore: DEBUG
 
 management:
   context-path: /status
 
-  server.port: 8080
+logging.level.root: INFO
+logging.level.pl.artcoder.videostore: INFO

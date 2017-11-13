@@ -7,9 +7,11 @@ buildscript {
 		mavenLocal()
 		mavenCentral()
 		jcenter()
+		maven { url "https://plugins.gradle.org/m2/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "gradle.plugin.org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.4.2"
 	}
 }
 
@@ -19,6 +21,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'org.unbroken-dome.test-sets'
 
 group = 'pl.artcoder.playground'
 version = '0.0.1-SNAPSHOT'
@@ -28,13 +31,21 @@ repositories {
 	mavenCentral()
 }
 
+testSets {
+	integrationTest
+}
+
+integrationTest.mustRunAfter test
+
+project.integrationTest {
+	outputs.upToDateWhen { false }
+}
 
 dependencies {
 	//spring
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 
 	//database
@@ -51,7 +62,12 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile ("org.spockframework:spock-core:$spock_version")
 	testCompile ("org.spockframework:spock-spring:$spock_version")
-	testCompile ("com.jayway.restassured:spring-mock-mvc:+")
+
+	//integration tests
+	integrationTestCompile('org.springframework.boot:spring-boot-starter-test')
+	integrationTestCompile ("com.jayway.restassured:spring-mock-mvc:+")
+	integrationTestCompile ("org.spockframework:spock-core:$spock_version")
+	integrationTestCompile ("org.spockframework:spock-spring:$spock_version")
 }
 
 jacoco {
@@ -74,6 +90,10 @@ idea {
 		downloadJavadoc = true
 		downloadSources = true
 	}
+}
+
+tasks.withType(Test) {
+	reports.html.destination = file("${reporting.baseDir}/${name}")
 }
 
 sourceSets.main.resources.srcDir 'src/main/java'
