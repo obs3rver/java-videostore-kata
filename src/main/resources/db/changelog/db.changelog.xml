@@ -7,8 +7,6 @@
 
     <changeSet id="001-create-film-table" author="arkadiusz.sojda">
 
-        <createSequence sequenceName="FILM_SEQ"/>
-
         <createTable tableName="film">
             <column name="ID" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
