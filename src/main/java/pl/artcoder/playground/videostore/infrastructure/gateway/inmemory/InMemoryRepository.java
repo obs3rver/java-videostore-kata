@@ -4,13 +4,14 @@ import io.vavr.control.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface InMemoryRepository<E, Id> {
+import java.io.Serializable;
+
+public interface InMemoryRepository<E, Id extends Serializable> {
     Page<E> findAll(Pageable pageable);
 
     E save(E entity);
 
     void delete(E entity);
 
-    Option<E> findById(Id filmId);
-
+    Option<E> findById(Id id);
 }

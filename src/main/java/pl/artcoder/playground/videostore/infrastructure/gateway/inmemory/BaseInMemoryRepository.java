@@ -20,7 +20,7 @@ public abstract class BaseInMemoryRepository<E, Id extends Serializable> impleme
 
     @Override
     public Page<E> findAll(Pageable pageable) {
-        return new PageImpl(
+        return new PageImpl<>(
                 repo
                         .takeRight(pageable.getPageSize())
                         .values()
