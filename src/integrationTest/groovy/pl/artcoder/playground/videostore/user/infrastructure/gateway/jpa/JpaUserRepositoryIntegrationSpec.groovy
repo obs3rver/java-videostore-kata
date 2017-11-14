@@ -1,4 +1,4 @@
-package pl.artcoder.playground.videostore.user.gateway.jpa
+package pl.artcoder.playground.videostore.user.infrastructure.gateway.jpa
 
 import io.vavr.control.Option
 import org.springframework.beans.factory.annotation.Autowired

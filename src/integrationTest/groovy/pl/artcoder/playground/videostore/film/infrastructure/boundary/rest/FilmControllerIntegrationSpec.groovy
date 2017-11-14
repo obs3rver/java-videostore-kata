@@ -1,4 +1,4 @@
-package pl.artcoder.playground.videostore.film.infrastructure.rest
+package pl.artcoder.playground.videostore.film.infrastructure.boundary.rest
 
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.ResultActions
