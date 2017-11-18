@@ -10,10 +10,10 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SaveFilm {
+public class SaveFilmCommand {
     private final FilmRepository filmRepository;
 
-    public Film save(Film film) {
+    public Film execute(Film film) {
         return filmRepository.save(film);
     }
 }

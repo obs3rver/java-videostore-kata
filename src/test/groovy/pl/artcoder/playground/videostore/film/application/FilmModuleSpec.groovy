@@ -20,10 +20,10 @@ class FilmModuleSpec extends Specification implements SampleFilms {
     FilmRepository filmRepository
 
     @Subject
-    SaveFilm saveFilm
+    SaveFilmCommand saveFilm
 
     @Subject
-    ShowFilm showFilm
+    ShowFilmQuery showFilm
 
     Film film
 
@@ -76,7 +76,7 @@ class FilmModuleSpec extends Specification implements SampleFilms {
     }
 
     private Film aSavedFilm() {
-        saveFilm.save(
+        saveFilm.execute(
                 createOldFilm(filmFactory)
         )
     }

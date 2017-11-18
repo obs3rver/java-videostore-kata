@@ -15,7 +15,7 @@ class UserModuleSpec extends Specification {
     UserRepository userRepository
 
     @Subject
-    FindUser findUser
+    FindUserQuery findUser
 
     User user
 
@@ -34,7 +34,7 @@ class UserModuleSpec extends Specification {
         user = aSavedUser()
 
         when:
-        Option<User> maybeUser = findUser.findByUsername(user.getUsername())
+        Option<User> maybeUser = findUser.findBy(user.getUsername())
 
         then:
         maybeUser.isDefined()

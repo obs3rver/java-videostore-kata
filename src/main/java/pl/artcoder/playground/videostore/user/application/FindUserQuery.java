@@ -11,10 +11,10 @@ import pl.artcoder.playground.videostore.user.domain.Username;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class FindUser {
+public class FindUserQuery {
     private final UserRepository userRepository;
 
-    public Option<User> findByUsername(Username username) {
+    public Option<User> findBy(Username username) {
         return userRepository.findOneByUsername(username);
     }
 }

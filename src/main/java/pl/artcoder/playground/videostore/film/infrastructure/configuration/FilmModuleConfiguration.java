@@ -1,7 +1,7 @@
 package pl.artcoder.playground.videostore.film.infrastructure.configuration;
 
-import pl.artcoder.playground.videostore.film.application.SaveFilm;
-import pl.artcoder.playground.videostore.film.application.ShowFilm;
+import pl.artcoder.playground.videostore.film.application.SaveFilmCommand;
+import pl.artcoder.playground.videostore.film.application.ShowFilmQuery;
 import pl.artcoder.playground.videostore.film.domain.Film;
 import pl.artcoder.playground.videostore.film.domain.FilmFactory;
 import pl.artcoder.playground.videostore.film.domain.FilmIdSequenceGenerator;
@@ -12,12 +12,12 @@ import pl.artcoder.playground.videostore.film.infrastructure.gateway.inmemory.In
 public class FilmModuleConfiguration {
     private final InMemoryFilmRepository filmRepository = new InMemoryFilmRepository(Film::getId);
 
-    public ShowFilm showFilm() {
-        return new ShowFilm(filmRepository());
+    public ShowFilmQuery showFilm() {
+        return new ShowFilmQuery(filmRepository());
     }
 
-    public SaveFilm saveFilm() {
-        return new SaveFilm(filmRepository());
+    public SaveFilmCommand saveFilm() {
+        return new SaveFilmCommand(filmRepository());
     }
 
     public FilmFactory filmFactory() {

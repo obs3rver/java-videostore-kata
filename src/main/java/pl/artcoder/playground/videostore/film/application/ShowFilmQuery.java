@@ -14,7 +14,7 @@ import pl.artcoder.playground.videostore.film.domain.Title;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ShowFilm {
+public class ShowFilmQuery {
     private final FilmRepository filmRepository;
 
     public Page<Film> list(Pageable pageable) {

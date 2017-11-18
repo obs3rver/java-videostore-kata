@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.artcoder.playground.videostore.user.application.FindUser;
+import pl.artcoder.playground.videostore.user.application.FindUserQuery;
 import pl.artcoder.playground.videostore.user.domain.Username;
 
 import java.util.function.Function;
@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 @Configuration
 class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    private FindUser findUser;
+    private FindUserQuery findUserQuery;
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,8 +49,8 @@ class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter 
             @Override
             public UserDetails loadUserByUsername(String username)
                     throws UsernameNotFoundException {
-                return findUser
-                        .findByUsername(Username.from(username))
+                return findUserQuery
+                        .findBy(Username.from(username))
                         .map(toSpringUser())
                         .getOrElseThrow(
                                 usernameNotFoundException(username)

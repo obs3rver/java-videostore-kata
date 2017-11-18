@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.ResultActions
 import pl.artcoder.playground.videostore.base.IntegrationSpec
-import pl.artcoder.playground.videostore.film.application.SaveFilm
+import pl.artcoder.playground.videostore.film.application.SaveFilmCommand
 import pl.artcoder.playground.videostore.film.commons.SampleFilms
 import pl.artcoder.playground.videostore.film.domain.Film
 
@@ -14,13 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements SampleFilms {
     @Autowired
-    SaveFilm saveFilm
+    SaveFilmCommand saveFilm
 
     @WithMockUser
     def "should get films"() {
         given: 'inventory has sample film'
         Film film = createOldFilm()
-        saveFilm.save(film)
+        saveFilm.execute(film)
 
         when: 'I go to /films'
         ResultActions getFilms = mockMvc.perform(get("/films"))

@@ -13,10 +13,10 @@ import pl.artcoder.playground.videostore.film.domain.Title
 class FilmModuleIntegrationSpec extends IntegrationSpec implements SampleFilms {
 
     @Autowired
-    SaveFilm saveFilm
+    SaveFilmCommand saveFilm
 
     @Autowired
-    ShowFilm showFilm
+    ShowFilmQuery showFilm
 
     @Autowired
     FilmRepository filmRepository
@@ -65,7 +65,7 @@ class FilmModuleIntegrationSpec extends IntegrationSpec implements SampleFilms {
     }
 
     private Film aSavedFilm() {
-        saveFilm.save(
+        saveFilm.execute(
                 createOldFilm()
         )
     }
