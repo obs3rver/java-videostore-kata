@@ -33,5 +33,11 @@ public class Film {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private FilmType filmType;
+    private Type filmType;
+
+    public enum Type {
+        NEW,
+        REGULAR,
+        OLD
+    }
 }

@@ -4,7 +4,7 @@ import groovy.transform.CompileStatic
 import pl.artcoder.playground.videostore.film.domain.Film
 import pl.artcoder.playground.videostore.film.domain.FilmFactory
 
-import static pl.artcoder.playground.videostore.film.domain.FilmType.*
+import static pl.artcoder.playground.videostore.film.domain.Film.Type.*
 
 @CompileStatic
 trait SampleFilms {

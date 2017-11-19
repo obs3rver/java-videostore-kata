@@ -28,8 +28,8 @@ class FilmModuleSpec extends Specification implements SampleFilms {
     Film film
 
     def setup() {
-        saveFilm = config.saveFilm()
-        showFilm = config.showFilm()
+        saveFilm = config.saveFilmCommand()
+        showFilm = config.showFilmQuery()
         filmFactory = config.filmFactory()
         filmRepository = config.filmRepository()
     }

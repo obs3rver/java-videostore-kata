@@ -12,11 +12,11 @@ import pl.artcoder.playground.videostore.film.infrastructure.gateway.inmemory.In
 public class FilmModuleConfiguration {
     private final InMemoryFilmRepository filmRepository = new InMemoryFilmRepository(Film::getId);
 
-    public ShowFilmQuery showFilm() {
+    public ShowFilmQuery showFilmQuery() {
         return new ShowFilmQuery(filmRepository());
     }
 
-    public SaveFilmCommand saveFilm() {
+    public SaveFilmCommand saveFilmCommand() {
         return new SaveFilmCommand(filmRepository());
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class FilmFactory {
     private final FilmIdSequenceGenerator filmIdSequenceGenerator;
 
-    public Film createFilmWithTitleAndType(@NonNull String filmTitle, @NonNull FilmType filmType) {
+    public Film createFilmWithTitleAndType(@NonNull String filmTitle, @NonNull Film.Type filmType) {
         return Film.builder()
                 .id(filmIdSequenceGenerator.nextId())
                 .title(Title.from(filmTitle))
