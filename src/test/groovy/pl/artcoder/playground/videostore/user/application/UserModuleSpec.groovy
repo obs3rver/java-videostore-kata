@@ -1,8 +1,6 @@
 package pl.artcoder.playground.videostore.user.application
 
 import io.vavr.control.Option
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 import pl.artcoder.playground.videostore.user.domain.*
 import pl.artcoder.playground.videostore.user.infrastructure.configuration.UserModuleConfiguration
 import spock.lang.Specification
@@ -10,18 +8,20 @@ import spock.lang.Subject
 
 class UserModuleSpec extends Specification {
     UserModuleConfiguration config = new UserModuleConfiguration()
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder()
 
     UserRepository userRepository
 
+    AddUserCommand addUserCommand
+
     @Subject
-    FindUserQuery findUser
+    FindUserQuery findUserQuery
 
     User user
 
     def setup() {
         userRepository = config.userRepository()
-        findUser = config.findUser()
+        addUserCommand = config.addUserCommand()
+        findUserQuery = config.findUserQuery()
     }
 
     def cleanup() {
@@ -34,7 +34,7 @@ class UserModuleSpec extends Specification {
         user = aSavedUser()
 
         when:
-        Option<User> maybeUser = findUser.findBy(user.getUsername())
+        Option<User> maybeUser = findUserQuery.findBy(user.getUsername())
 
         then:
         maybeUser.isDefined()
@@ -42,11 +42,12 @@ class UserModuleSpec extends Specification {
     }
 
     private def aSavedUser() {
-        userRepository.save(
+        addUserCommand.execute(
                 User.builder()
                         .id(0)
                         .username(Username.from("user"))
-                        .password(Password.from(passwordEncoder.encode("secret")))
+                        .password(Password.from("secret"))
+                        .role(User.Role.ROLE_USER)
                         .bonusPoints(BonusPoints.zero())
                         .build()
         )

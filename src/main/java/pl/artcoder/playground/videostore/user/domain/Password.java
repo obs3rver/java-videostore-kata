@@ -26,4 +26,8 @@ public class Password {
         return new Password(encodedPassword);
     }
 
+    public static Password empty() {
+        return new Password("");
+    }
+
 }

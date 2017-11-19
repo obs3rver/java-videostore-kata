@@ -26,4 +26,8 @@ public class Username {
         return new Username(username);
     }
 
+    public static Username anonymous() {
+        return new Username("anonymous");
+    }
+
 }

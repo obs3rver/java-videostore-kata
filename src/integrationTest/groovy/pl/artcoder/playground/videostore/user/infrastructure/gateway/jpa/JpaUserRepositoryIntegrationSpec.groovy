@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import pl.artcoder.playground.videostore.base.IntegrationSpec
 import pl.artcoder.playground.videostore.user.domain.*
+import spock.lang.Subject
 
 class JpaUserRepositoryIntegrationSpec extends IntegrationSpec {
+    @Subject
     @Autowired
     UserRepository userRepository
 
@@ -37,6 +39,7 @@ class JpaUserRepositoryIntegrationSpec extends IntegrationSpec {
                 User.builder()
                         .username(Username.from("user"))
                         .password(Password.from(passwordEncoder.encode("secret")))
+                        .role(User.Role.ROLE_USER)
                         .bonusPoints(BonusPoints.zero())
                         .build()
         )

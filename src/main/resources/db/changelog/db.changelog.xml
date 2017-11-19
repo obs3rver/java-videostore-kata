@@ -49,4 +49,14 @@
 
     </changeSet>
 
+    <changeSet id="004-add-user-role-to-user-table" author="arkadiusz.sojda">
+
+        <addColumn tableName="user">
+            <column name="ROLE" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+    </changeSet>
+
 </databaseChangeLog>

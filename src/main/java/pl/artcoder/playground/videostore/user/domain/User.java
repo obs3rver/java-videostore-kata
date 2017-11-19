@@ -10,6 +10,8 @@ import lombok.experimental.Wither;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +40,14 @@ public class User {
     private Password password;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @NotNull
     @Embedded
     private BonusPoints bonusPoints;
+
+    public enum Role {
+        ROLE_USER, ROLE_ADMIN, ROLE_ANONYMOUS
+    }
 }
