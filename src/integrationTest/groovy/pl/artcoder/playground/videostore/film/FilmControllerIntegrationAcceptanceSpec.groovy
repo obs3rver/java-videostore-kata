@@ -30,7 +30,7 @@ class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements
                 .andExpect(content().json("""
                 {
                     "content": [
-                        {"title":"$film.title.title"}
+                        {"title":"$film.title.title","type":"$film.filmType"}
                     ]
                 }"""))
 
@@ -40,7 +40,7 @@ class FilmControllerIntegrationAcceptanceSpec extends IntegrationSpec implements
         then: 'I see details of that film'
         getFilm.andExpect(status().isOk())
                 .andExpect(content().json("""
-                        {"title":"$film.title.title"}
+                        {"title":"$film.title.title","type":"$film.filmType"}
                 """))
     }
 }
