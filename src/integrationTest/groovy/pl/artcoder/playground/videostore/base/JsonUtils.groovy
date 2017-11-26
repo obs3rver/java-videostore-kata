@@ -6,11 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper
 trait JsonUtils {
     private final ObjectMapper objectMapper = new ObjectMapper()
 
-    def asJsonString(final Object obj) {
+    String asJsonString(final Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e)
         }
+    }
+
+    String asPageJsonString(final List<Object> objects) {
+        String strContent = asJsonString(objects)
+        """
+                {
+                    "content": $strContent
+                }
+        """
     }
 }

@@ -17,3 +17,6 @@ management:
 
 logging.level.root: INFO
 logging.level.pl.artcoder.videostore: INFO
+
+renting.price.PREMIUM: 40.0
+renting.price.BASIC: 30.0
